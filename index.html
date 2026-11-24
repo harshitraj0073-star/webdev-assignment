@@ -3,11 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Dev Lab</title>
+    <title>TrackMySpend</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Web Dev Lab</h1>
+    <div class="container">
+        <h1>TrackMySpend</h1>
+
+        <!-- Set Starting Balance -->
+        <div class="balance-box">
+            <input type="number" id="balanceInput" placeholder="Enter your total money (₹)" min="0">
+            <button type="button" id="setBalanceBtn">Set Balance</button>
+        </div>
+
+        <!-- Add Expense Form -->
+        <form id="expenseForm">
+            <input type="text" id="title" placeholder="Expense name (e.g. Lunch)" required>
+            <input type="number" id="amount" placeholder="Amount (₹)" min="1" required>
+            <select id="category">
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Books">Books</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+            </select>
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <h2>Total Spent: ₹<span id="totalAmount">0</span></h2>
+        <h2>Remaining: ₹<span id="remainingAmount">0</span></h2>
+
+        <ul id="expenseList"></ul>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
