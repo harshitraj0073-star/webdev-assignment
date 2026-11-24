@@ -129,3 +129,13 @@ li {
 .delete-btn:hover {
     background-color: #b91c1c;
 }
+
+@media (max-width: 480px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    #title, form button {
+        grid-column: span 1;
+    }
+}
