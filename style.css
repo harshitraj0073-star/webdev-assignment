@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
+    background-color: #f7f6f2;
     padding: 40px 20px;
 }
 
@@ -36,22 +36,23 @@ input, select, button {
 }
 
 button {
-    background-color: #2563eb;
+    background-color: #0f766e;
     color: white;
     border: none;
     cursor: pointer;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #1d4ed8;
+    background-color: #115e59;
 }
 
 #setBalanceBtn {
-    background-color: #4b5563;
+    background-color: #475569;
 }
 
 #setBalanceBtn:hover {
-    background-color: #374151;
+    background-color: #334155;
 }
 
 .summary {
