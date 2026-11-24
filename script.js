@@ -4,6 +4,7 @@ const amountInput = document.getElementById("amount");
 const categoryInput = document.getElementById("category");
 const totalAmount = document.getElementById("totalAmount");
 const remainingAmount = document.getElementById("remainingAmount");
+const financialGpa = document.getElementById("financialGpa");
 const expenseList = document.getElementById("expenseList");
 
 const balanceInput = document.getElementById("balanceInput");
@@ -12,7 +13,7 @@ const setBalanceBtn = document.getElementById("setBalanceBtn");
 let startingBalance = 0;
 let totalSpent = 0;
 
-// Update both Total Spent and Remaining Balance
+// Update Total Spent, Remaining Balance, and Financial GPA
 function updateDisplay() {
     const remaining = startingBalance - totalSpent;
     totalAmount.textContent = totalSpent;
@@ -23,7 +24,30 @@ function updateDisplay() {
     } else {
         remainingAmount.style.color = "green";
     }
+
+    // Simple Financial GPA calculation
+    if (startingBalance === 0) {
+        financialGpa.textContent = "4.0 (A)";
+    } else {
+        const leftPercent = (remaining / startingBalance) * 100;
+        if (leftPercent >= 50) financialGpa.textContent = "4.0 (A)";
+        else if (leftPercent >= 25) financialGpa.textContent = "3.0 (B)";
+        else if (leftPercent >= 0) financialGpa.textContent = "2.0 (C)";
+        else financialGpa.textContent = "1.0 (Over Budget)";
+    }
 }
+
+// Smart merchant detection (auto-select category as you type)
+titleInput.addEventListener("input", function () {
+    const text = titleInput.value.toLowerCase();
+    if (text.includes("lunch") || text.includes("dinner") || text.includes("zomato") || text.includes("swiggy") || text.includes("food")) {
+        categoryInput.value = "Food";
+    } else if (text.includes("uber") || text.includes("ola") || text.includes("bus") || text.includes("metro") || text.includes("auto")) {
+        categoryInput.value = "Travel";
+    } else if (text.includes("book") || text.includes("pen") || text.includes("notebook") || text.includes("amazon")) {
+        categoryInput.value = "Books";
+    }
+});
 
 // Set Balance button
 setBalanceBtn.addEventListener("click", function () {
@@ -53,7 +77,20 @@ form.addEventListener("submit", function (e) {
     updateDisplay();
 
     const li = document.createElement("li");
-    li.textContent = title + " (" + category + ") - ₹" + amount;
+    const span = document.createElement("span");
+    span.textContent = title + " (" + category + ") - ₹" + amount;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.className = "delete-btn";
+    deleteBtn.addEventListener("click", function () {
+        totalSpent = totalSpent - amount;
+        updateDisplay();
+        li.remove();
+    });
+
+    li.appendChild(span);
+    li.appendChild(deleteBtn);
     expenseList.appendChild(li);
 
     form.reset();
