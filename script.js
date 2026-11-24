@@ -4,7 +4,7 @@ const amountInput = document.getElementById("amount");
 const categoryInput = document.getElementById("category");
 const totalAmount = document.getElementById("totalAmount");
 const remainingAmount = document.getElementById("remainingAmount");
-const financialGpa = document.getElementById("financialGpa");
+const budgetScore = document.getElementById("budgetScore");
 const expenseList = document.getElementById("expenseList");
 
 const balanceInput = document.getElementById("balanceInput");
@@ -25,15 +25,25 @@ function updateDisplay() {
         remainingAmount.style.color = "green";
     }
 
-    // Simple Financial GPA calculation
+    // Simple Budget Score
     if (startingBalance === 0) {
-        financialGpa.textContent = "4.0 (A)";
+        budgetScore.textContent = "Good";
+        budgetScore.style.color = "green";
     } else {
         const leftPercent = (remaining / startingBalance) * 100;
-        if (leftPercent >= 50) financialGpa.textContent = "4.0 (A)";
-        else if (leftPercent >= 25) financialGpa.textContent = "3.0 (B)";
-        else if (leftPercent >= 0) financialGpa.textContent = "2.0 (C)";
-        else financialGpa.textContent = "1.0 (Over Budget)";
+        if (leftPercent >= 50) {
+            budgetScore.textContent = "Good";
+            budgetScore.style.color = "green";
+        } else if (leftPercent >= 25) {
+            budgetScore.textContent = "Okay";
+            budgetScore.style.color = "orange";
+        } else if (leftPercent >= 0) {
+            budgetScore.textContent = "Low";
+            budgetScore.style.color = "darkorange";
+        } else {
+            budgetScore.textContent = "Over Budget";
+            budgetScore.style.color = "red";
+        }
     }
 }
 
